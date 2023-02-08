@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
 const PAGES_LIST = [
-  { name: "Context example", path: "/context" },
-  { name: "Redux example", path: "/redux" },
+  { name: "Context Example", path: "/context" },
+  { name: "Redux Example", path: "/redux" },
+  { name: "Context Search Memo", path: "/context-search" },
 ];
 
 export default function MainPage() {
@@ -11,7 +12,7 @@ export default function MainPage() {
       <h2>Pages awaitables</h2>
       <ul>
         {PAGES_LIST.map(({ name, path }) => (
-          <li>
+          <li key={path}>
             <Link to={path}>{name}</Link>
           </li>
         ))}
