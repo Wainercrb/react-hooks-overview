@@ -1,19 +1,23 @@
-import { useAppContext } from "../contexts/AppContext";
 import { PlaceholderList } from "../components/PlaceholderList";
 import { useState } from "react";
+import { useDispatch, useStore } from 'react-redux';
+import { FETCH_DATA } from '../store/actions/appActions';
 import { fetchPlaceholderPosts } from "../services/placeholderAPI";
 
-export default function ContextPage() {
-  const { data, dispatch } = useAppContext();
+export default function ReduxPage() {
   const [isLoading, setIsLoading] = useState(false);
+  
+  const dispatch = useDispatch();
+  const store = useStore();
+  const { app: { data } } = store.getState()
 
   const handleFetchData = () => {
     setIsLoading(true);
     fetchPlaceholderPosts()
       .then((data) => {
-        dispatch({ type: "FETCH_DATA", value: data });
+        dispatch({type: FETCH_DATA, payload: data })
         setIsLoading(false);
-      }).catch(console.log);
+      });
   };
 
   return (
